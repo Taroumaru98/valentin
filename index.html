@@ -1,143 +1,314 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Valentin</title>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Valentin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
-<style>
-body{
-    margin:0;
-    background:#FDB0C0;
-    font-family:'Press Start 2P', cursive;
-    color:#2d1e40;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-    overflow:hidden;
-    text-align:center;
-}
+    <style>
+        body {
+            margin: 0;
+            background-image: url("https://wallpapers.com/images/hd/pink-kawaii-pastel-cute-strawberry-tw0noi03h6iqdfj1.jpg");
+            background-position: center;
+            font-family: 'Press Start 2P', cursive;
+            color: #2d1e40;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: auto;
+            text-align: center;
+        }
 
-.screen{
-    position:absolute;
-    width:90%;
-    transition:0.5s;
-}
+        .screen {
+            position: absolute;
+            width: 90%;
+            max-width: 400px;
+        }
 
-.hidden{
-    opacity:0;
-    pointer-events:none;
-}
 
-.box{
-    background:#ffe6f2;
-    padding:20px;
-    border:6px solid #2d1e40;
-    box-shadow:8px 8px 0px #2d1e40;
-}
+        .hidden {
+            display: none;
+        }
 
-button{
-    font-family:'Press Start 2P', cursive;
-    padding:15px;
-    margin:10px;
-    border:4px solid #2d1e40;
-    font-size:10px;
-}
+        .box {
+            background: #ffe6f2;
+            padding: 20px;
+            border: 6px solid #2d1e40;
+            box-shadow: 8px 8px 0px #2d1e40;
+            position: relative;
+            padding-bottom: 120px;
+        }
 
-#yesBtn{ background:#b8f2e6; }
-#noBtn{ background:#ffb3c6; position:absolute; }
 
-#xpBar{
-    height:15px;
-    width:0%;
-    background:#b8f2e6;
-    margin-top:10px;
-    transition:0.3s;
-}
+        button {
+            font-family: 'Press Start 2P', cursive;
+            padding: 15px;
+            margin: 10px;
+            border: 4px solid #2d1e40;
+            font-size: 10px;
+        }
 
-.barContainer{
-    width:100%;
-    height:15px;
-    background:#fff;
-    border:3px solid #2d1e40;
-    margin-top:10px;
-}
-</style>
+        #yesBtn {
+            background: #b8f2e6;
+        }
+
+        #noBtn {
+            background: #ffb3c6;
+            position: absolute;
+        }
+
+        #xpBar {
+            height: 15px;
+            width: 0%;
+            background: #b8f2e6;
+            margin-top: 10px;
+            transition: width 0.3s ease, background 0.3s ease;
+        }
+
+        .barContainer {
+            width: 100%;
+            height: 15px;
+            background: #fff;
+            border: 3px solid #2d1e40;
+            margin-top: 10px;
+        }
+
+        .heart {
+            position: absolute;
+            animation: float 4s linear forwards;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-300px);
+                opacity: 0;
+            }
+        }
+
+        .love-text {
+            line-height: 1.6;
+        }
+
+        .intro {
+            font-size: 10px;
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+
+        .message {
+            font-size: 9px;
+            margin-bottom: 15px;
+        }
+
+        .final-line {
+            font-size: 11px;
+            color: #ff4d6d;
+        }
+
+        #restartBtn {
+            background: #d8b4f8;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        .final-gif {
+            align-content: center;
+            width: 120px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            animation: popIn 0.6s ease;
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .bottom-gif {
+            width: 110px;
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0.95;
+        }
+
+        .spotify-code {
+            width: 200px;
+            margin: 50px 0;
+            border-radius: 10px;
+        }
+    </style>
 </head>
 
 <body>
 
-<div id="screen1" class="screen">
-    <div class="box">
-        <h3>¿Lista para una aventura?</h3>
-        <p>Press Start</p>
-        <button onclick="next(1)">START</button>
-    </div>
-</div>
-
-<div id="screen2" class="screen hidden">
-    <div class="box">
-        <p>Antes que nada,</p>
-        <p>Gracias por ser el amor de mi vida<br> por cada momento que me has dado.<br> Te amaré eternamente. </p>
-        <button onclick="next(2)">CONTINUE</button>
-    </div>
-</div>
-
-<div id="screen3" class="screen hidden">
-    <div class="box">
-        <p>¿Quieres ser mi Valentín? 💘</p>
-        <button id="yesBtn">YES</button>
-        <button id="noBtn">NO</button>
-
-        <div class="barContainer">
-            <div id="xpBar"></div>
+    <div id="screen1" class="screen">
+        <div class="box">
+            <h3>¿Traveler Lista para un nuevo encargo?</h3>
+            <button onclick="next(1)">START</button>
         </div>
-        <p style="font-size:8px;">XP: <span id="xpText">0</span>%</p>
+
+        <img src="https://media.tenor.com/gZ2OPWCBJrwAAAAj/cinnamoroll-cinnamoroll-sanrio-character.gif"
+            class="bottom-gif" alt="Cute animation">
+
     </div>
-</div>
 
-<div id="screen4" class="screen hidden">
-    <div class="box">
-        <h3>🏆 ACHIEVEMENT UNLOCKED</h3>
-        <p>Sere tu eterno Valentín 💖</p>
-        <p>Gracias por existir ✨</p>
+    <div id="screen2" class="screen hidden">
+        <div class="box">
+            <div class="love-text">
+                <p class="intro">Antes que nada...</p>
+
+                <p class="message">
+                    Gracias por ser el amor de mi vida.<br>
+                    Por cada obstaculo que hemos superado juntos.<br>
+                    Por cada momento que me has regalado.
+                </p>
+
+                <p class="final-line">Te amaré eternamente 💖</p>
+            </div>
+
+            <button onclick="next(2)">CONTINUE</button>
+        </div>
+
+        <img src="https://i.pinimg.com/originals/62/47/95/62479586fa237d932487c8684b776161.gif" class="bottom-gif"
+            alt="Cute animation">
     </div>
-</div>
 
-<script>
-let xp = 0;
-const yesBtn = document.getElementById("yesBtn");
-const noBtn = document.getElementById("noBtn");
-const xpBar = document.getElementById("xpBar");
-const xpText = document.getElementById("xpText");
+    <div id="screen3" class="screen hidden">
+        <div class="box">
+            <p>¿Quieres ser mi Valentín? 💘</p>
+            <button id="yesBtn">YES</button>
+            <button id="noBtn">NO</button>
+        </div>
 
-function next(n){
-    document.getElementById("screen"+n).classList.add("hidden");
-    document.getElementById("screen"+(n+1)).classList.remove("hidden");
-}
+        <img src="https://i.pinimg.com/originals/2f/1a/b4/2f1ab4adffb51d6f565a2eeaea71cfa9.gif" class="bottom-gif"
+            alt="Cute animation">
+    </div>
 
-function moveNo(){
-    const x = Math.random() * (window.innerWidth - 100);
-    const y = Math.random() * (window.innerHeight - 100);
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
+    <div id="screen4" class="screen hidden">
+        <div class="box">
+            <p style="font-size:8px; margin-bottom:10px;">
+                Soundtrack de nuestra aventura 🎵🎵🎵
+            </p>
 
-    xp += 10;
-    if(xp > 100) xp = 100;
-    xpBar.style.width = xp + "%";
-    xpText.textContent = xp;
-}
+            <img src="src/code.png" class="spotify-code" alt="Spotify Code">
 
-noBtn.addEventListener("touchstart", moveNo);
-noBtn.addEventListener("mouseover", moveNo);
+            <h3>¡Gracias por existir preciosa!</h3>
+            <p>Seras mi eterno San Valentín 💖</p>
+            <p>Te amo ✨</p>
 
-yesBtn.addEventListener("click", ()=>{
-    document.getElementById("screen3").classList.add("hidden");
-    document.getElementById("screen4").classList.remove("hidden");
-});
-</script>
+            <img src="https://i.pinimg.com/originals/ec/85/e7/ec85e785614f35d2e2816759ac244612.gif" class="bottom-gif">
+
+
+            <button id="restartBtn">Reiniciar 🔄</button>
+
+        </div>
+    </div>
+
+
+    <script>
+        let noClicks = 0;
+        let heartInterval = null;
+        const yesBtn = document.getElementById("yesBtn");
+        const noBtn = document.getElementById("noBtn");
+        const restartBtn = document.getElementById("restartBtn");
+
+        function next(n) {
+            document.getElementById("screen" + n).classList.add("hidden");
+            document.getElementById("screen" + (n + 1)).classList.remove("hidden");
+        }
+
+        function moveNo() {
+            const box = document.querySelector("#screen3 .box");
+
+            const maxX = box.clientWidth - noBtn.offsetWidth - 10;
+            const maxY = box.clientHeight - noBtn.offsetHeight - 10;
+
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
+
+            noBtn.style.left = x + "px";
+            noBtn.style.top = y + "px";
+
+            noClicks++;
+
+            if (noClicks === 5) {
+                alert("¿Cómo que no, preciosa? \nEl destino ya tiró los dados...\nAcepta tu destino uwu.");
+            }
+
+            if (noClicks === 10) {
+                alert("¿Aun insistiendo? \nNunca perderé.");
+            }
+        }
+
+
+        noBtn.addEventListener("touchstart", moveNo);
+        noBtn.addEventListener("mouseover", moveNo);
+
+        yesBtn.addEventListener("click", () => {
+            document.getElementById("screen3").classList.add("hidden");
+            document.getElementById("screen4").classList.remove("hidden");
+            startHearts();
+        });
+
+        function startHearts() {
+            if (heartInterval) return;
+
+            heartInterval = setInterval(() => {
+                const heart = document.createElement("div");
+                heart.classList.add("heart");
+                heart.innerHTML = "💖";
+                heart.style.left = Math.random() * window.innerWidth + "px";
+                heart.style.bottom = "0px";
+                heart.style.fontSize = (Math.random() * 20 + 20) + "px";
+                document.body.appendChild(heart);
+
+                setTimeout(() => heart.remove(), 4000);
+            }, 300);
+        }
+
+
+        restartBtn.addEventListener("click", () => {
+
+            if (heartInterval) {
+                clearInterval(heartInterval);
+                heartInterval = null;
+            }
+
+            document.querySelectorAll(".heart").forEach(h => h.remove());
+
+            noClicks = 0;
+
+            noBtn.style.left = "0px";
+            noBtn.style.top = "0px";
+
+            document.querySelectorAll(".screen").forEach(s => s.classList.add("hidden"));
+            document.getElementById("screen1").classList.remove("hidden");
+        });
+
+
+    </script>
 
 </body>
+
 </html>
